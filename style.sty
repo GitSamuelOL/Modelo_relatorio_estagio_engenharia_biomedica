@@ -1,0 +1,90 @@
+% Pacotes utilizados
+\usepackage[utf8]{inputenc}  
+\usepackage[brazil]{babel}  
+\usepackage{graphicx}  
+\usepackage{float}  
+\usepackage{caption}  
+\usepackage{geometry}  
+\usepackage{setspace}  
+\usepackage{indentfirst}  
+\usepackage{titlesec}  
+\usepackage{tocloft}  
+\usepackage[table]{xcolor}  
+\usepackage{fancyhdr}  
+\usepackage{xcolor}  
+\usepackage{ragged2e}  
+\usepackage{microtype}  
+\usepackage{tocloft}
+\usepackage{etoolbox}
+
+% ========== Modificação do sumário (apenas a parte visual) =========
+
+\renewcommand{\cfttoctitlefont}{\hfill\vspace*{15mm}\bfseries\MakeUppercase}  % Alinha o título do sumário ao centro, em negrito e maiúsculo, com espaçamento extra
+\renewcommand{\cftaftertoctitle}{\hfill}  % Alinha o conteúdo após o título do sumário à direita
+
+% Definições dos pontos entre as entradas do sumário
+\renewcommand{\cftdot}{.}  % Define o caractere que será usado para conectar as entradas (pontos)
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}  % Define como os pontos entre as seções serão preenchidos
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}  % Define como os pontos entre as subseções serão preenchidos
+\renewcommand{\cftdotsep}{1}  % Ajusta a densidade dos pontos (quanto menor o valor, mais pontos)
+
+% Personalização da formatação das fontes no sumário
+
+\renewcommand{\cftsecfont}{\normalfont}  % Define a fonte das seções no sumário como normal
+\renewcommand{\cftsecpagefont}{\normalfont}  % Define a fonte dos números das páginas das seções como normal
+\renewcommand{\cftsubsecfont}{\normalfont}  % Define a fonte das subseções no sumário como normal
+\renewcommand{\cftsubsecpagefont}{\normalfont}  % Define a fonte dos números das páginas das subseções como normal
+
+% Modifica o espaçamento no sumário
+\setlength{\cftbeforesecskip}{10pt}  % Define o espaço antes das seções no sumário
+\setlength{\cftsubsecnumwidth}{3em}  % Define a largura da área destinada aos números das subseções
+
+
+% ========== Formatação dos títulos de seções e subseções ============
+
+% Para a seção (\section)
+
+\titleformat{\section}
+  {\normalfont\bfseries}  % Estilo do título da seção: fonte normal, negrito, centralizado
+  {\thesection}{1em}{}  % Número da seção e espaçamento entre o número e o título
+
+% Personaliza apenas a seção "RESUMO"
+\newcommand{\centralizasecao}[1]{%
+  \titleformat{\section}[block]{\normalfont\bfseries\centering}{\thesection}{1em}{} 
+  \section*{#1}
+  \titleformat{\section}[block]{\normalfont\bfseries}{\thesection}{1em}{} 
+}
+
+% Para a subseção (\subsection)
+
+\titleformat{\subsection}
+  {\normalfont\bfseries\raggedright}  % Estilo do título da subseção: fonte normal, negrito, alinhado à esquerda
+  {\thesubsection}{1em}{}  % Número da subseção e espaçamento entre o número e o título
+
+% ========= Definindo as margens e espaçamentos do documento =========
+
+\geometry{a4paper, margin=2.5cm}  % Define as margens do documento como 2.5 cm em todas as direções para o formato A4
+\onehalfspacing  % Define o espaçamento entre as linhas como 1.5 (espaçamento um pouco maior que o normal)
+\setlength{\parindent}{1.25cm}  % Define a indentação do primeiro parágrafo como 1.25 cm
+\setlength{\parskip}{0.2cm}  % Define o espaçamento entre os parágrafos como 0.2 cm
+
+% ========= Definição de cor para a numeração das páginas ============
+
+\definecolor{paggray}{gray}{0.5}  % Cria uma cor cinza com intensidade 0.5 para a numeração das páginas
+
+% ========== Personalização do cabeçalho e rodapé ====================
+
+\pagestyle{fancy}  % Define que o estilo de cabeçalho/rodapé será 'fancy'
+\fancyhf{}  % Limpa qualquer configuração de cabeçalho/rodapé anterior
+\fancyhead[R]{\textcolor{paggray}{\thepage}}  % Coloca o número da página no canto direito do cabeçalho, na cor cinza definida
+\renewcommand{\headrulewidth}{0pt}  % Remove a linha horizontal do cabeçalho
+
+% ========= Ajustes para evitar sobreposição do cabeçalho ============
+
+\setlength{\headheight}{15pt}  % Define a altura do cabeçalho
+\addtolength{\topmargin}{-3pt}  % Ajusta a margem superior para evitar que o cabeçalho sobreponha o texto
+
+% ========== Evitar duplicata nas referências ============
+
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
